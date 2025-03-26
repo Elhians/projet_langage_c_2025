@@ -5,20 +5,19 @@ void affichageParOrdreDeMerite(Etudiant VETU[], int SUIVANT[], int NBETU, int DE
     int rg = 1;
     int i = DEB;
 
-    printf("/t/t/t LISTE DES ETUDIANTS PAR ORDRE DE MERITE /t/t/t\n");
-    printf("RANG: /t/t/t NOM: /t/t/t NOTE: /t\n");
+    printf("LISTE DES ETUDIANTS PAR ORDRE DE MERITE \n");
 
-    printf("%d /t/t/t/t %d /t/t/t/t %s /t/t/t/t %g \n", rg ,VETU[DEB].numero, VETU[DEB].nom, VETU[DEB].note);
+    printf("RANG: %d ; NUMERO: %d ; NOM: %s ; NOTE: %g \n", rg ,VETU[DEB].numero, VETU[DEB].nom, VETU[DEB].note);
 
     
     while (SUIVANT[i] != SUIVANT[0])
     {
         rg++;
-        printf("%d /t/t/t/t %d /t/t/t/t %s /t/t/t/t %g \n", rg ,VETU[SUIVANT[i]].numero, VETU[SUIVANT[i]].nom, VETU[SUIVANT[i]].note);
+        printf("RANG: %d ; NUMERO: %d ; NOM: %s ; NOTE: %g \n", rg ,VETU[SUIVANT[i]].numero, VETU[SUIVANT[i]].nom, VETU[SUIVANT[i]].note);
         i = SUIVANT[i];
     }
         rg++;
-        printf("%d /t/t/t/t %d /t/t/t/t %s /t/t/t/t %g \n", rg ,VETU[SUIVANT[i]].numero, VETU[SUIVANT[i]].nom, VETU[SUIVANT[i]].note);
+        printf("RANG: %d ; NUMERO: %d ; NOM: %s; NOTE: %g \n", rg ,VETU[SUIVANT[i]].numero, VETU[SUIVANT[i]].nom, VETU[SUIVANT[i]].note);
 }
 
 int estDansTab(int nb, int tab[], int taille){

@@ -9,10 +9,14 @@ int main(){
         {104, "Eve", 14.8},
         {105, "Bob", 15.0}
     };
+    int DEB = 1;
+    int SUIVANT[] = {3,5,3,0,2,4};
     int tab[6];
 
     //affichageAleatoire(etudiants, 6);
-    afficherParOrdreAlphabetique(etudiants, 6);
+    //afficherParOrdreAlphabetique(etudiants, 6);
+
+    affichageParOrdreDeMerite(etudiants, SUIVANT, 6, DEB);
 
     //printf("%d\n", firstInDictionnaryOrder("Alice", "David"));
     
