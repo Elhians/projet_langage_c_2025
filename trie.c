@@ -72,8 +72,9 @@ void remplirTabAvcNbAleatoire(int *tab, int taille){
         }
     }
     
-    
+
 }
+
 void affichageAleatoire(Etudiant VETU[], int NBETU){
 
     int *tab = malloc(sizeof(int) * NBETU);
@@ -93,6 +94,27 @@ void affichageAleatoire(Etudiant VETU[], int NBETU){
     {
         printf("/t/t/t/t %s /t/t/t/t %d ", VETU[tab[i]].nom, VETU[tab[i]].note);
     }
-    
+    free(tab);
 }
 
+int firstInDictionnaryOrder(char* mot1, char* mot2){
+
+    int i = 0, s1 = 0, s2 = 0;
+
+    while(mot1[i] != '\0' || mot2[i] != '\0'){
+        s1 += tolower(mot1[i]);
+        s2 += tolower(mot2[i]);
+        if (s1 > s2)
+        {
+            return 2;
+        }
+        if (s2 > s1)
+        {
+            return  1;
+        }
+        
+        i++;
+    }
+    return 0;
+    
+}
