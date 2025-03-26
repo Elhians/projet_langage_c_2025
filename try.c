@@ -1,31 +1,26 @@
 #include "entete.h"
 
-// char* toLowerCase(char* chaine, char* copieChaine);
-char* firstInDictionnaryOrder(char* mot1, char* mot2);
-
 int main(){
-    
-    char chaine1[] = "x";
-    char chaine2[] = "y";
+    Etudiant etudiants[] = {
+        {000, "", 0.0},
+        {101, "David", 18.2},
+        {102, "Alice", 12.5},
+        {103, "Charlie", 9.0},
+        {104, "Eve", 14.8},
+        {105, "Bob", 15.0}
+    };
+    int tab[6];
 
-    printf("%s et %s -> %s\n", "chainea", "chaineb", firstInDictionnaryOrder("chainea", "chaineb"));
+    //affichageAleatoire(etudiants, 6);
+    afficherParOrdreAlphabetique(etudiants, 6);
+
+    //printf("%d\n", firstInDictionnaryOrder("Alice", "David"));
     
     return 0;
 }
 
-/* char* toLowerCase(char* chaine, char* copieChaine){
 
-    for (int i = 0; chaine[i] != '\0'; i++)
-    {
-        copieChaine[i] = tolower(chaine[i]);
-        
-    }
-
-    return copieChaine;
-    
-} */
-
-char* firstInDictionnaryOrder(char* mot1,char* mot2){
+/* char* firstInDictionnaryOrder(char* mot1,char* mot2){
 
     int i = 0, s1 = 0, s2 = 0;
 
@@ -45,4 +40,4 @@ char* firstInDictionnaryOrder(char* mot1,char* mot2){
     }
     return mot1;
     
-}
+} */
