@@ -10,7 +10,7 @@ int main(){
         {105, "Bob", 15.0}
     };
     int DEB = 1;
-    int SUIVANT[] = {3,5,3,0,2,4};
+    int SUIVANT[] = {0,5,3,0,2,4};
     int tab[6];
 
     //affichageAleatoire(etudiants, 6);

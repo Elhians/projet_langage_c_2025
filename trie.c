@@ -10,14 +10,12 @@ void affichageParOrdreDeMerite(Etudiant VETU[], int SUIVANT[], int NBETU, int DE
     printf("RANG: %d ; NUMERO: %d ; NOM: %s ; NOTE: %g \n", rg ,VETU[DEB].numero, VETU[DEB].nom, VETU[DEB].note);
 
     
-    while (SUIVANT[i] != SUIVANT[0])
+    while (SUIVANT[i] != 0)
     {
         rg++;
         printf("RANG: %d ; NUMERO: %d ; NOM: %s ; NOTE: %g \n", rg ,VETU[SUIVANT[i]].numero, VETU[SUIVANT[i]].nom, VETU[SUIVANT[i]].note);
         i = SUIVANT[i];
     }
-        rg++;
-        printf("RANG: %d ; NUMERO: %d ; NOM: %s; NOTE: %g \n", rg ,VETU[SUIVANT[i]].numero, VETU[SUIVANT[i]].nom, VETU[SUIVANT[i]].note);
 }
 
 int estDansTab(int nb, int tab[], int taille){
