@@ -15,6 +15,7 @@ struct Etudiant {
     char *nom;
     double note;
 };
+
 int firstInDictionnaryOrder(char* mot1, char* mot2);
 void remplirTabAvcNbAleatoire(int *tab, int taille);
 void affichageParOrdreDeMerite(Etudiant VETU[], int SUIVANT[], int NBETU, int DEB);

@@ -4,7 +4,7 @@ void affichageParOrdreDeMerite(Etudiant VETU[], int SUIVANT[], int NBETU, int DE
 
     int rg = 1;
     int i = DEB;
-
+    
     printf("LISTE DES ETUDIANTS PAR ORDRE DE MERITE \n");
 
     printf("RANG: %d ; NUMERO: %d ; NOM: %s ; NOTE: %g \n", rg ,VETU[DEB].numero, VETU[DEB].nom, VETU[DEB].note);
@@ -45,12 +45,11 @@ int estDansTab(int nb, int tab[], int taille){
 
 int nbAleatoire(int min, int max){
 
-    //sleep(1); //pause d'une seconde pour etre sur que la valeur change
     srand(time(NULL)); //initialisation du generateur de nombre aleatoire en fonction du nombre de seconde ecoulee depuis 1970 00h00mn00s
 
     //int nbAleatoire = (rand()% (max - min + 1)) + min; //Valeur aleatoire comprise entre 0 et max - min + 1 a laquelle on ajoute min
 
-    return (rand()% (max - min)) + min;
+    return (rand() % (max - min)) + min;
 
 }
 
@@ -123,7 +122,7 @@ void trierParOrdreAlphabetique(Etudiant* VETU, int NBETU){
     
     Etudiant temp;
 
-    for (int i = 1; i < NBETU - 1; i++)
+    for (int i = 1; i < NBETU - 1; i++) 
     {
         for (int j = i + 1; j < NBETU; j++)
         {
@@ -135,8 +134,8 @@ void trierParOrdreAlphabetique(Etudiant* VETU, int NBETU){
             }
         }
     }
-    
 }
+
 void afficherParOrdreAlphabetique(Etudiant* VETU, int NBETU){
     printf("LISTE PAR ORDRE ALPHABETIQUE DES ETUDIANTS\n");
 

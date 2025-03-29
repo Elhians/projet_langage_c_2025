@@ -13,10 +13,10 @@ int main(){
     int SUIVANT[] = {0,5,3,0,2,4};
     int tab[6];
 
-    //affichageAleatoire(etudiants, 6);
+    affichageAleatoire(etudiants, 6);
     //afficherParOrdreAlphabetique(etudiants, 6);
 
-    affichageParOrdreDeMerite(etudiants, SUIVANT, 6, DEB);
+    //affichageParOrdreDeMerite(etudiants, SUIVANT, 6, DEB);
 
     //printf("%d\n", firstInDictionnaryOrder("Alice", "David"));
     
