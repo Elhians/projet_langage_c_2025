@@ -2,12 +2,13 @@
 #define _SUPERMATRICE_
 #include <stdio.h>
 #include <stdlib.h>
+
 /*definition de la structure*/
 typedef struct  
 {
     int nl;
     int nc;
-    double* (*ligne)[]; //ligne est un pointeur vers un tableau qui contient des pointeurs vers un double
+    double* *ligne; //ligne est un pointeur vers un tableau qui contient des pointeurs vers un double
 } descripteur;
 
 /* ligne pointe sur un tableau tab 

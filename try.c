@@ -1,24 +1,24 @@
-#include "entete.h"
+
+#include "supermatrice.h"
 
 int main(){
-    Etudiant etudiants[] = {
-        {000, "", 0.0},
-        {101, "David", 18.2},
-        {102, "Alice", 12.5},
-        {103, "Charlie", 9.0},
-        {104, "Eve", 14.8},
-        {105, "Bob", 15.0}
-    };
-    int DEB = 1;
-    int SUIVANT[] = {0,5,3,0,2,4};
-    int tab[6];
+    
+    descripteur* desc = allouerSupermat(5,2);
 
-    affichageAleatoire(etudiants, 6);
-    //afficherParOrdreAlphabetique(etudiants, 6);
+    double t1[2] = {1,2};
+    double t2[2] = {3,4};
+    double t3[2] = {5,6};
+    double t4[2] = {7,8};
+    double t5[2] = {9,10};
 
-    //affichageParOrdreDeMerite(etudiants, SUIVANT, 6, DEB);
+    double* tab[5] = {t1,t2,t3,t4,t5};
 
-    //printf("%d\n", firstInDictionnaryOrder("Alice", "David"));
+    desc->ligne = tab;
+
+    printf("%p\n", desc);
+    printf("%d\n", desc->nl);
+    printf("%d\n", desc->nc);
+    printf("%p\n", desc->ligne);
     
     return 0;
 }
