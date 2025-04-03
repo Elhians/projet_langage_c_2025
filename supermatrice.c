@@ -7,6 +7,12 @@ SUPERMRT allouerSupermat(int nl, int nc){
     double*tab[], malloc renvoie un pointeur vers ce tableau, 
     sizeof(double)*nc:taille d'une ligne*/
 
+    if (nl <= 0 || nc <= 0)
+    {
+        fputs("ERREUR! VALEUR INCORRECTE POUR LE NOMBRE DE LIGNE OU LE NOMBRE DE COLONNE.\n", stderr);
+        exit(EXIT_FAILURE);
+    }
+    
     
     int i = 0;
     double* *ligne = malloc(sizeof(double*)*nl);
