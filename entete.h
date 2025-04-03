@@ -19,7 +19,7 @@ struct Etudiant {
 int firstInDictionnaryOrder(char* mot1, char* mot2);
 void remplirTabAvcNbAleatoire(int *tab, int taille);
 void affichageParOrdreDeMerite();
-void affichageAleatoire(Etudiant VETU[], int NBETU);
+void affichageAleatoire();
 void afficherParOrdreAlphabetique(Etudiant* VETU, int NBETU);
 
 #endif

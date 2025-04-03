@@ -64,9 +64,10 @@ int chargerEtudiant(){
     }
     //fread permet de lire des données binaires à partir d'un fichier
     fread(&NBETU, sizeof(int), 1, f);
-    fread(VETU, sizeof(Etudiant), MAX_ETUDIANTS, f);
+    fread(VETU, sizeof(Etudiant),NBETU, f);
+    fread(SUIVANT, sizeof(int),NBETU, f);
     fread(&DEB, sizeof(int), 1, f);
-    fread(SUIVANT, sizeof(int), MAX_ETUDIANTS, f);
+
     fclose(f);
 }
 
@@ -80,8 +81,9 @@ void sauvegarderEtudiant(){
     
     fwrite(&NBETU, sizeof(int), 1, f);
     fwrite(VETU,sizeof(Etudiant),NBETU,f);
-    fwrite(&DEB, sizeof(int), 1, f);
     fwrite(SUIVANT, sizeof(int), NBETU, f);
+    fwrite(&DEB, sizeof(int), 1, f);
+
    
 
     fclose(f);
@@ -92,19 +94,13 @@ void affichageParOrdreDeMerite(){
     int i = DEB;
     
     printf("LISTE DES ETUDIANTS PAR ORDRE DE MERITE \n");
-
-    printf("RANG: %d ; NUMERO: %d ; NOM: %s ; NOTE: %g \n", rg ,VETU[DEB].numero, VETU[DEB].nom, VETU[DEB].note);
-
-    
-    while (SUIVANT[i] != -1)
+    while (i!= -1)
     {
-        
-        printf("RANG: %d ; NUMERO: %d ; NOM: %s ; NOTE: %g \n", rg ,VETU[SUIVANT[i]].numero, VETU[SUIVANT[i]].nom, VETU[SUIVANT[i]].note);
+        printf("RANG: %d ; NUMERO: %d ; NOM: %s ; NOTE: %g \n", rg ,VETU[i].numero, VETU[i].nom, VETU[i].note);
         i = SUIVANT[i];
         rg++;
     }
 }
-/*
 
 int estDansTab(int nb, int tab[], int taille){
 
@@ -161,9 +157,9 @@ void remplirTabAvcNbAleatoire(int *tab, int taille){
 
 }
 
-void affichageAleatoire(Etudiant VETU[], int NBETU){
+void affichageAleatoire(){
 
-    int *tab = malloc(sizeof(int) * NBETU);
+    int *tab = (int*) malloc(sizeof(int) * NBETU);
 
     if (tab == NULL)
     {
@@ -175,7 +171,7 @@ void affichageAleatoire(Etudiant VETU[], int NBETU){
 
     printf("LISTE NON ORDONNEE DES ETUDIANTS\n");
 
-    for (int i = 1; i < NBETU; i++)
+    for (int i = 0; i < NBETU; i++)
     {
         printf("Numero: %d ; Nom: %s ; Note: %g \n", VETU[tab[i]].numero, VETU[tab[i]].nom, VETU[tab[i]].note);
     }
@@ -229,18 +225,17 @@ void afficherParOrdreAlphabetique(Etudiant* VETU, int NBETU){
 
     trierParOrdreAlphabetique(VETU, NBETU);
 
-    for (int i = 1; i < NBETU; i++)
+    for (int i = 0; i < NBETU; i++)
     {
         printf("Nom: %s ; Numero: %d ; Note: %g \n", VETU[i].nom, VETU[i].numero, VETU[i].note);
     }
 
-}*/
+}
 int main() {
     int choix, numero;
     char nom[50];
     float note;
     chargerEtudiant();
-
     do {
         printf("\nMenu:\n");
         printf("1. Ajouter un etudiant\n");
@@ -248,6 +243,8 @@ int main() {
         printf("3. Afficher les etudiants\n");
         printf("4. Sauvegarder et quitter\n");
         printf("5. Afficher les etudiants par ordre de mérite\n");
+        printf("6. Afficher les etudiants par ordre alphabetique\n");
+        printf("7. Afficher les etudiants de facon aleatoire\n");
 
         printf("Choix : ");
         scanf("%d", &choix);
@@ -282,6 +279,12 @@ int main() {
                 break;
             case 5:
                 affichageParOrdreDeMerite();
+                break;
+            case 6:
+                afficherParOrdreAlphabetique(VETU, NBETU);
+                break;
+            case 7:
+                affichageAleatoire();
                 break;
             default:
                 printf("Choix invalide.\n");
