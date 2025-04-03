@@ -5,15 +5,34 @@ int main(){
     
     descripteur* desc = allouerSupermat(5,2);
 
-    double t1[2] = {1,2};
-    double t2[2] = {3,4};
-    double t3[2] = {5,6};
-    double t4[2] = {7,8};
-    double t5[2] = {9,10};
+    /* double t1 = {1,2};
+    double t2 = {3,4};
+    double t3 = {5,6};
+    double t4 = {7,8};
+    double t5 = {9,10};
 
-    double* tab[5] = {t1,t2,t3,t4,t5};
+    double* tab[5] = {t1,t2,t3,t4,t5}; */
 
-    desc->ligne = tab;
+    double* tab = desc->ligne ;
+
+    double t1[] = tab[0];
+    double t2[]= tab[1];
+    double t3[] = tab[2];
+    double t4[]= tab[3];
+    double t5[] = tab[4];
+
+
+    t1[0] = 0;
+    t2[0] = 0;
+    t3[0] = 0;
+    t4[0] = 0;
+    t5[0] = 0;
+
+    t1[1] = 0;
+    t2[1] = 0;
+    t3[1] = 0;
+    t4[1] = 0;
+    t5[1] = 0;
 
     printf("%p\n", desc);
     printf("%d\n", desc->nl);

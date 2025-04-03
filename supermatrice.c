@@ -7,20 +7,32 @@ SUPERMRT allouerSupermat(int nl, int nc){
     double*tab[], malloc renvoie un pointeur vers ce tableau, 
     sizeof(double)*nc:taille d'une ligne*/
 
-    double* t = malloc(sizeof(double)*nc);
     
-    double* *ligne = malloc(sizeof(t)*nl);
+    int i = 0;
+    double* *ligne = malloc(sizeof(double*)*nl);
 
     if (ligne == NULL)
     {
-        fputs("ERREUR!\n", stderr);
+        fputs("ERREUR LORS DE L'ALLOCATION DU TABLEAU DE LIGNE!\n", stderr);
         exit(EXIT_FAILURE);
+    }
+
+    while (i < nl)
+    {
+        ligne[i] = malloc(sizeof(double)*nc);
+
+        if (ligne[i] == NULL)
+        {
+            fputs("ERREUR LORS DE L'ALLOCATION DES LIGNES!\n", stderr);
+            exit(EXIT_FAILURE);
+        }
+        
     }
 
     descripteur* pdesc = malloc(sizeof(descripteur));
     if (pdesc == NULL)
     {
-        fputs("ERREUR!\n", stderr);
+        fputs("ERREUR LORS DE L'ALLOCATION DU DESCRIPTEUR!\n", stderr);
         exit(EXIT_FAILURE);
     }
     
