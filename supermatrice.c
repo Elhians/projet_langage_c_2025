@@ -52,14 +52,22 @@ SUPERMRT allouerSupermat(int nl, int nc){
 
 double acces(SUPERMRT a, int i, int j){
 
+    if (a == NULL)
+    {
+        fputs("Le supermrt n'existe pas.", stderr);
+        exit(EXIT_FAILURE);
+    }
+    
     descripteur desc = *a;
-
+    
     if (i < 0 || i >= desc.nl || j < 0 || j >= desc.nc )
     {
         fputs("Cet element n'existe pas.", stderr);
         exit(EXIT_FAILURE);
     }
+
     
+
     double* tab[] = *desc.ligne;
     double* ti = tab[i];
     double aij = ti[j];

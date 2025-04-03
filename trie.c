@@ -1,6 +1,6 @@
 #include "entete.h"
 
-void affichageParOrdreDeMerite(Etudiant VETU[], int SUIVANT[], int NBETU, int DEB){
+void affichageParOrdreDeMerite(Etudiant* VETU, int* SUIVANT, int NBETU, int DEB){
 
     int rg = 1;
     int i = DEB;
@@ -18,7 +18,7 @@ void affichageParOrdreDeMerite(Etudiant VETU[], int SUIVANT[], int NBETU, int DE
     }
 }
 
-int estDansTab(int nb, int tab[], int taille){
+int estDansTab(int nb, int* tab, int taille){
 
     int trouve = 1;
     int milieu = taille / 2;
@@ -73,7 +73,7 @@ void remplirTabAvcNbAleatoire(int *tab, int taille){
 
 }
 
-void affichageAleatoire(Etudiant VETU[], int NBETU){
+void affichageAleatoire(Etudiant* VETU, int NBETU){
 
     int *tab = malloc(sizeof(int) * NBETU);
 
