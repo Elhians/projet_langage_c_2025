@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "entete.h"
+#include <stdbool.h>
 #define MAX_ETUDIANTS 100
 
 Etudiant VETU[MAX_ETUDIANTS]; 
@@ -237,29 +238,55 @@ int main() {
     float note;
     chargerEtudiant();
     do {
+        ajouter_etudiant(0, "mame", 17);
+        ajouter_etudiant(5, "fallou", 16);
+        ajouter_etudiant(3, "lala", 14);
+        ajouter_etudiant(7, "zendaya", 9);
+        ajouter_etudiant(2, "mouhamadou", 18);
+        ajouter_etudiant(4, "moussa", 12);
+
         printf("\nMenu:\n");
         printf("1. Ajouter un etudiant\n");
         printf("2. Supprimer un etudiant\n");
         printf("3. Afficher les etudiants\n");
-        printf("4. Sauvegarder et quitter\n");
-        printf("5. Afficher les etudiants par ordre de mérite\n");
-        printf("6. Afficher les etudiants par ordre alphabetique\n");
-        printf("7. Afficher les etudiants de facon aleatoire\n");
-
+        printf("4. Afficher les etudiants par ordre de mérite\n");
+        printf("5. Afficher les etudiants par ordre alphabetique\n");
+        printf("6. Afficher les etudiants de facon aleatoire\n");
+        printf("7. Sauvegarder et quitter\n");
         printf("Choix : ");
         scanf("%d", &choix);
-
         switch (choix) {
             case 1:
+                printf("Nom : ");
+                scanf("%s", nom); 
+                bool num_dispo = false;
                 printf("Numero : ");
                 scanf("%d", &numero);
-                printf("Nom : ");
-                scanf("%s", nom);
+                while (num_dispo== false)
+                {
+                    num_dispo=true;
+                    for (int i = 0; i < NBETU; i++)
+                    {
+                        if (VETU[i].numero == numero)
+                        {
+                            num_dispo = false;
+                            printf("Le numero %d est déjà utilisé. Veuillez entrer un autre numero : ", numero);
+                            scanf("%d", &numero);
+
+                        }
+                    }
+                }
                 printf("Note : ");
                 scanf("%f", &note);
+                // Vérification de la note
+                while (note<0 || note>20)
+                {
+                    printf("Veuillez ecrire une note entre 0 et 20 svp.");
+                    scanf("%f", &note);
+                }
+        
                 ajouter_etudiant(numero, nom, note);
                 break;
-            
             case 2:
                 printf("Numero de l'etudiant à supprimer : ");
                 scanf("%d", &numero);
@@ -274,22 +301,23 @@ int main() {
                 break;
                 return 0;
             case 4:
-                sauvegarderEtudiant();
-                printf("Sauvegarde réussie. Au revoir !\n");
-                break;
-            case 5:
                 affichageParOrdreDeMerite();
                 break;
-            case 6:
+            case 5:
                 afficherParOrdreAlphabetique(VETU, NBETU);
                 break;
-            case 7:
+            case 6:
                 affichageAleatoire();
+                break;
+            case 7:
+                sauvegarderEtudiant();
+                printf("Sauvegarde réussie. Au revoir !\n");
                 break;
             default:
                 printf("Choix invalide.\n");
         }
-    } while (choix != 4);
+    } while (choix != 7);
+    sauvegarderEtudiant();
 
     return 0;
 }
