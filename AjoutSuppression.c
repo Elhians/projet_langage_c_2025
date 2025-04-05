@@ -14,24 +14,55 @@ Etudiant VETU[MAX_ETUDIANTS];
 int SUIVANT[MAX_ETUDIANTS];   
 int DEB = -1;                 
 int NBETU = 0;                
-void ajouter_etudiant(int numero, char nom[], float note) {
-    if (NBETU >= MAX_ETUDIANTS) {
-        printf("Erreur : Nombre maximal d'etudiants atteint.\n");
-        return;
+int ajouterEtudiant(Etudiant* VETU, int* SUIVANT, int *NBETU, int* DEB, int numero, char* nom, float note) {
+
+    if (VETU == NULL || NBETU == NULL || nom == NULL)
+    {
+        fputs("ERREUR!\n", stderr);
     }
-    int i;
-    for(i==0; i<NBETU; i++) {
+    
+
+    if (*NBETU >= MAX_ETUDIANTS) {
+        printf("Erreur : Nombre maximal d'etudiants atteint.\n");
+        return 0;
+    }
+
+    for(int i = 1; i < *NBETU; i++) {
         if (VETU[i].numero == numero) {
             printf("Erreur : Etudiant deja present.\n");
-            return;
+            return 0;
         }
     }
-    // Ajouter l'étudiant à la fin du tableau
-    VETU[NBETU].numero = numero;
-    strcpy(VETU[NBETU].nom, nom);
-    VETU[NBETU].note = note;
+    // Ajouter l'étudiant apres le dernier etudiant present
+    VETU[*NBETU].numero = numero;
+    strcpy(VETU[*NBETU].nom, nom);
+    VETU[*NBETU].note = note;
 
-    NBETU++;
+    //Dans le cas ou le tableau est vide ou si l'étudiant a une note supérieure à l'étudiant en tête de liste, on le place en tête de liste.
+    if(*DEB == 0 || note > VETU[*DEB].note){
+        SUIVANT[*NBETU] = *DEB;
+        *DEB = *NBETU;
+    }else{
+        //dans le cas contraire on va cherchez l'indice ou on doit placer l'élément 
+        int i = *DEB;
+        //on verifie qu'on est pas à la fin du tableau et que la note est supérieure à celle de l'étudiant qu'on insére
+        while(SUIVANT[i] != -1 && VETU[SUIVANT[i]].note > note){
+            //on passe au prochain élément
+            i = SUIVANT[i];
+        }
+        //on intervrtit les deux valeurs
+        SUIVANT[*NBETU] = SUIVANT[i];
+        SUIVANT[i] = *NBETU;
+    }
+
+    (*NBETU)++;
+
+    if ((*NBETU) >= 2)
+    {
+        printf("Ajout effectue avec succes!\n");
+    }
+
+    return 1;
 }
 int supprimerEtudiant(Etudiant* VETU, int* SUIVANT, int* NBETU, int* DEB, int numero) {
     if (*NBETU == 0) {
