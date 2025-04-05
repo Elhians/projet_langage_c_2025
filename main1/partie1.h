@@ -9,12 +9,12 @@ struct Etudiant {
     float note;
 };
 
-int ajouterEtudiant(Etudiant* VETU, int* NBETU, int numero, char* nom, float note);
+int ajouterEtudiant(Etudiant* VETU, int* SUIVANT, int* NBETU, int* DEB, int numero, char* nom, float note);
 int supprimerEtudiant(Etudiant* VETU, int* NBETU, int numero);
-int chargerEtudiant(Etudiant* VETU, int* NBETU, int* SUIVANT);
-int sauvegarderEtudiant(Etudiant* VETU, int* NBETU, int* SUIVANT);
+int chargerEtudiant(Etudiant* VETU, int* NBETU, int* SUIVANT, int* DEB);
+int sauvegarderEtudiant(Etudiant* VETU, int* NBETU, int* SUIVANT, int* DEB);
 void affichageParOrdreDeMerite(Etudiant* VETU, int* SUIVANT, int NBETU, int DEB);
 void affichageAleatoire(Etudiant* VETU, int NBETU);
-void afficherParOrdreAlphabetique(Etudiant* VETU, int NBETU);
+void trierParOrdreAlphabetique(Etudiant* VETU, int NBETU);
 
 #endif

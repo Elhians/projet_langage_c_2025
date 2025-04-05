@@ -33,7 +33,7 @@ int main(){
         exit(EXIT_FAILURE);
     }
 
-    chargerEtudiant(VETU, &NBETU, SUIVANT);
+    chargerEtudiant(VETU, &NBETU, SUIVANT, &DEB);
 
     do{
         menuPrincipale();
@@ -49,13 +49,13 @@ int main(){
                 vider_buffer();
 
                 printf("Nom : ");
-                scanf("%s", nom);
+                fgets(nom, 50, stdin);
 
                 printf("Note : ");
                 scanf("%g", &note);
                 vider_buffer();
 
-                ajouterEtudiant(VETU, &NBETU, numero, nom, note);
+                ajouterEtudiant(VETU, SUIVANT, &NBETU, &DEB, numero, nom, note);
 
                 break;
             
@@ -89,7 +89,7 @@ int main(){
 
             case 5:
 
-                afficherParOrdreAlphabetique(VETU, NBETU);
+                trierParOrdreAlphabetique(VETU, NBETU);
                 printf("Nombre d'etudiants: %d\n", NBETU - 1);
                 break;
 
@@ -100,7 +100,7 @@ int main(){
                 break;
             case 7:
 
-                sauvegarderEtudiant(VETU, &NBETU, SUIVANT);
+                sauvegarderEtudiant(VETU, &NBETU, SUIVANT, &DEB);
                 printf("Au revoir !\n");
                 break;
 
