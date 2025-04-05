@@ -1,4 +1,4 @@
-#include "entete.h"
+#include "trie.h"
 
 void affichageParOrdreDeMerite(Etudiant* VETU, int* SUIVANT, int NBETU, int DEB){
 
