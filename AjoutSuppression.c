@@ -42,7 +42,7 @@ int supprimerEtudiant(Etudiant* VETU, int* SUIVANT, int* NBETU, int* DEB, int nu
     int i = *DEB, avant = -1, trouve = -1;
 
     // Recherche de l'étudiant à supprimer et de son prédécesseur
-    while (i != -1) {
+    while (i != 0) { // On suit la chaîne jusqu'à trouver l'étudiant
         if (VETU[i].numero == numero) {
             trouve = i;
             break;
@@ -66,11 +66,19 @@ int supprimerEtudiant(Etudiant* VETU, int* SUIVANT, int* NBETU, int* DEB, int nu
         SUIVANT[avant] = SUIVANT[trouve];
     }
 
+    // Vérifier si l'étudiant supprimé était le dernier dans la chaîne
+    int dernier = *DEB;
+    while (SUIVANT[dernier] != 0) { // Trouver le nouveau dernier
+        dernier = SUIVANT[dernier];
+    }
+    SUIVANT[dernier] = 0; // Mettre à jour le dernier étudiant
+
     (*NBETU)--;
 
     printf("Suppression réussie.\n");
     return 1;
 }
+
 
 int main() {
     int choix, numero;
