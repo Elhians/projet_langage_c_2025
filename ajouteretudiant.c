@@ -33,29 +33,43 @@ void ajouter_etudiant(int numero, char nom[], float note) {
 
     NBETU++;
 }
-void supprimerEtudiant(int numero) {
-    int i, trouve = -1;
+int supprimerEtudiant(Etudiant* VETU, int* SUIVANT, int* NBETU, int* DEB, int numero) {
+    if (*NBETU == 0) {
+        printf("Erreur : Aucun étudiant à supprimer.\n");
+        return 0;
+    }
 
-    // Trouver l'étudiant  à supprimer dans le tableau
-    for (i = 0; i < NBETU; i++) {
+    int i = *DEB, avant = -1, trouve = -1;
+
+    // Recherche de l'étudiant à supprimer et de son prédécesseur
+    while (i != -1) {
         if (VETU[i].numero == numero) {
             trouve = i;
             break;
         }
+        avant = i;  // Garder en mémoire le prédécesseur
+        i = SUIVANT[i];
     }
 
-    // Si l'étudiant n'est pas trouvé,on quitte
+    // Si l'étudiant n'est pas trouvé
     if (trouve == -1) {
         printf("Étudiant non trouvé.\n");
-        return;
+        return 0;
     }
 
-    // Décaler les éléments vers la gacuhe à partir de l'élément à suppimer pour ecraser sa valeur
-    for (i = trouve; i < NBETU - 1; i++) {
-        VETU[i] = VETU[i + 1];
+    // Mise à jour du chaînage
+    if (trouve == *DEB) {
+        // Si c'est le premier élément, on met à jour DEB
+        *DEB = SUIVANT[trouve];
+    } else {
+        // Sinon, on relie le prédécesseur au suivant
+        SUIVANT[avant] = SUIVANT[trouve];
     }
-    NBETU--;
+
+    (*NBETU)--;
+
     printf("Suppression réussie.\n");
+    return 1;
 }
 
 int main() {
