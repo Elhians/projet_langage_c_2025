@@ -13,7 +13,6 @@ SUPERMRT allouerSupermat(int nl, int nc){
         exit(EXIT_FAILURE);
     }
     
-    
     int i = 0;
     double* *ligne = malloc(sizeof(double*)*nl);
 
@@ -23,6 +22,15 @@ SUPERMRT allouerSupermat(int nl, int nc){
         exit(EXIT_FAILURE);
     }
 
+    descripteur* pdesc = malloc(sizeof(descripteur));
+    if (pdesc == NULL)
+    {
+        fputs("ERREUR LORS DE L'ALLOCATION DU DESCRIPTEUR!\n", stderr);
+        //liberer ligne precedement allouer
+        free(ligne);
+        exit(EXIT_FAILURE);
+    }
+    
     while (i < nl)
     {
         ligne[i] = malloc(sizeof(double)*nc);
@@ -30,18 +38,21 @@ SUPERMRT allouerSupermat(int nl, int nc){
         if (ligne[i] == NULL)
         {
             fputs("ERREUR LORS DE L'ALLOCATION DES LIGNES!\n", stderr);
+
+            //liberer ligne et pdesc preceement alloue
+            free(ligne);
+            free(pdesc);
+            //liberer toutes les lignes precedement alloue
+            for (int j = 0; j < i; i++)
+            {
+                free(ligne[j]);
+            }
+
             exit(EXIT_FAILURE);
         }
-        
+        i++;
     }
 
-    descripteur* pdesc = malloc(sizeof(descripteur));
-    if (pdesc == NULL)
-    {
-        fputs("ERREUR LORS DE L'ALLOCATION DU DESCRIPTEUR!\n", stderr);
-        exit(EXIT_FAILURE);
-    }
-    
     /*definition du descripteur */
     pdesc -> nl = nl;
     pdesc -> nc = nc;
@@ -58,21 +69,17 @@ double acces(SUPERMRT a, int i, int j){
         exit(EXIT_FAILURE);
     }
     
-    descripteur desc = *a;
-    
-    if (i < 0 || i >= desc.nl || j < 0 || j >= desc.nc )
+    if (i < 0 || i >= a->nl || j < 0 || j >= a->nc )
     {
         fputs("Cet element n'existe pas.", stderr);
         exit(EXIT_FAILURE);
     }
 
-    
+    //double* tab[] = a->ligne;
+    //double* ti = a->ligne[i];
+    //double aij = a->ligne[i][j];
 
-    double* tab[] = *desc.ligne;
-    double* ti = tab[i];
-    double aij = ti[j];
-
-    return aij;
+    return a->ligne[i][j];
 
 }
 
