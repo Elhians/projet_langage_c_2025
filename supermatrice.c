@@ -30,7 +30,7 @@ SUPERMRT allouerSupermat(int nl, int nc){
         free(ligne);
         exit(EXIT_FAILURE);
     }
-    
+
     while (i < nl)
     {
         ligne[i] = malloc(sizeof(double)*nc);
@@ -61,6 +61,7 @@ SUPERMRT allouerSupermat(int nl, int nc){
     return pdesc;
 }
 
+//juste pour tester, non demande par le prof, c'est la macro ACCES dans supermat.h qui est demande 
 double acces(SUPERMRT a, int i, int j){
 
     if (a == NULL)
