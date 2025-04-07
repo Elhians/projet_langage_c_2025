@@ -90,25 +90,23 @@ int supprimerEtudiant(Etudiant* VETU, int* SUIVANT, int* NBETU, int* DEB, int nu
 
     // Mise à jour du chaînage
     if (trouve == *DEB) {
-        // Si c'est le premier élément, on met à jour DEB
-        *DEB = SUIVANT[trouve];
+        *DEB = SUIVANT[trouve]; // Mettre à jour DEB si c'est le premier
     } else {
-        // Sinon, on relie le prédécesseur au suivant
-        SUIVANT[avant] = SUIVANT[trouve];
+        SUIVANT[avant] = SUIVANT[trouve]; // Relier le prédécesseur au suivant
     }
 
-    // Vérifier si l'étudiant supprimé était le dernier dans la chaîne
-    int dernier = *DEB;
-    while (SUIVANT[dernier] != 0) { // Trouver le nouveau dernier
-        dernier = SUIVANT[dernier];
+    // Supprimer l'étudiant dans VETU
+    for (int j = trouve; j < *NBETU - 1; j++) {
+        VETU[j] = VETU[j + 1]; // Décaler les étudiants restants
+        SUIVANT[j] = SUIVANT[j + 1]; // Décaler aussi les indices de SUIVANT
     }
-    SUIVANT[dernier] = 0; // Mettre à jour le dernier étudiant
 
-    (*NBETU)--;
+    (*NBETU)--; // Réduire le nombre total d'étudiants
 
     printf("Suppression réussie.\n");
     return 1;
 }
+
 
 
 int main() {
