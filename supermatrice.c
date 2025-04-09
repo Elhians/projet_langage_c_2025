@@ -2,11 +2,6 @@
 
 SUPERMRT allouerSupermat(int nl, int nc){
     
-    /*allocation d'un 
-    tableau de lignes ,tableau de pointeurs vers double(), 
-    double*tab[], malloc renvoie un pointeur vers ce tableau, 
-    sizeof(double)*nc:taille d'une ligne*/
-
     if (nl <= 0 || nc <= 0)
     {
         fputs("ERREUR! VALEUR INCORRECTE POUR LE NOMBRE DE LIGNE OU LE NOMBRE DE COLONNE.\n", stderr);
@@ -14,6 +9,14 @@ SUPERMRT allouerSupermat(int nl, int nc){
     }
     
     int i = 0;
+
+    /*allocation d'un 
+    tableau de lignes ,tableau de pointeurs vers double(double*), 
+    double*tab[], malloc renvoie un pointeur vers ce tableau, 
+    on le recupere dans le champs ligne de notre descripteur ligne 
+    sizeof(double*)*nl pour allouer le tableau qui contient
+    les pointeurs vers les lignes de la matrice*/
+
     double* *ligne = malloc(sizeof(double*)*nl);
 
     if (ligne == NULL)
@@ -22,6 +25,7 @@ SUPERMRT allouerSupermat(int nl, int nc){
         exit(EXIT_FAILURE);
     }
 
+    //allocation du descripteur
     descripteur* pdesc = malloc(sizeof(descripteur));
     if (pdesc == NULL)
     {
@@ -31,6 +35,7 @@ SUPERMRT allouerSupermat(int nl, int nc){
         exit(EXIT_FAILURE);
     }
 
+    //allocation des lignes de la matrice
     while (i < nl)
     {
         ligne[i] = malloc(sizeof(double)*nc);
@@ -53,7 +58,7 @@ SUPERMRT allouerSupermat(int nl, int nc){
         i++;
     }
 
-    /*definition du descripteur */
+    /*affectation des valeurs au champs du descripteur */
     pdesc -> nl = nl;
     pdesc -> nc = nc;
     pdesc -> ligne = ligne;    
@@ -82,5 +87,28 @@ double acces(SUPERMRT a, int i, int j){
 
     return a->ligne[i][j];
 
+}
+
+SUPERMRT superProduit(SUPERMRT a, SUPERMRT b) {
+    
+    if (a->nc != b->nl) {
+        return NULL;
+    }
+
+    SUPERMRT resultat = allouerSupermat(a->nl, b->nc);
+    if (resultat == NULL) {
+        return NULL;
+    }
+
+    for (int i = 0; i < a->nl; i++) {
+        for (int j = 0; j < b->nc; j++) {
+            resultat->ligne[i][j] = 0;
+            for (int k = 0; k < a->nc; k++) {
+                resultat->ligne[i][j] += a->ligne[i][k] * b->ligne[k][j];
+            }
+        }
+    }
+
+    return resultat;
 }
 
