@@ -35,28 +35,47 @@ void ajouter_etudiant(int numero, char nom[], float note) {
     }
     NBETU++;
 }
-void supprimerEtudiant(int numero) {
-    int i, trouve = -1;
+int supprimerEtudiant(Etudiant* VETU, int* SUIVANT, int* NBETU, int* DEB, int numero) {
+    if (*NBETU == 0) {
+        printf("Erreur : Aucun étudiant à supprimer.\n");
+        return 0;
+    }
 
-    // Trouver l'étudiant dans le tableau
-    for (i = 0; i < NBETU; i++) {
+    int i = *DEB, avant = -1, trouve = -1;
+
+    // Recherche de l'étudiant à supprimer et de son prédécesseur
+    while (i != 0) { // On suit la chaîne jusqu'à trouver l'étudiant
         if (VETU[i].numero == numero) {
             trouve = i;
             break;
         }
+        avant = i;  // Garder en mémoire le prédécesseur
+        i = SUIVANT[i];
     }
+
     // Si l'étudiant n'est pas trouvé
     if (trouve == -1) {
         printf("Étudiant non trouvé.\n");
-        return;
+        return 0;
     }
-    // Décaler les éléments pour combler le trou
-    for (i = trouve; i < NBETU - 1; i++) {
-        VETU[i] = VETU[i + 1];
+
+    // Mise à jour du chaînage
+    if (trouve == *DEB) {
+        *DEB = SUIVANT[trouve]; // Mettre à jour DEB si c'est le premier
+    } else {
+        SUIVANT[avant] = SUIVANT[trouve]; // Relier le prédécesseur au suivant
     }
-    // Réduire le nombre d'étudiants
-    NBETU--;
+
+    // Supprimer l'étudiant dans VETU
+    for (int j = trouve; j < *NBETU - 1; j++) {
+        VETU[j] = VETU[j + 1]; // Décaler les étudiants restants
+        SUIVANT[j] = SUIVANT[j + 1]; // Décaler aussi les indices de SUIVANT
+    }
+
+    (*NBETU)--; // Réduire le nombre total d'étudiants
+
     printf("Suppression réussie.\n");
+    return 1;
 }
 int chargerEtudiant(){
     FILE *f = fopen("etudiants.dat", "rb");//un fichier binaire (rb et wb)? pcq Contrairement à un fichier texte, un fichier binaire stocke les structures C telles qu'elles sont en mémoire, sans avoir à les convertir en chaînes de caractères.
