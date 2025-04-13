@@ -65,45 +65,58 @@ int ajouterEtudiant(Etudiant* VETU, int* SUIVANT, int *NBETU, int* DEB, int nume
     return 1;
 }
 int supprimerEtudiant(Etudiant* VETU, int* SUIVANT, int* NBETU, int* DEB, int numero) {
-    if (*NBETU == 0) {
-        printf("Erreur : Aucun étudiant à supprimer.\n");
-        return 0;
-    }
-
-    int i = *DEB, avant = -1, trouve = -1;
-
-    // Recherche de l'étudiant à supprimer et de son prédécesseur
-    while (i != 0) { // On suit la chaîne jusqu'à trouver l'étudiant
-        if (VETU[i].numero == numero) {
-            trouve = i;
+    int trouve = -1;
+    int precedent = -1;
+    int actuel = *DEB;
+    
+    // Recherche de l'étudiant à supprimer
+    while (actuel != -1) {
+        if (VETU[actuel].numero == numero) {
+            trouve = actuel;
             break;
         }
-        avant = i;  // Garder en mémoire le prédécesseur
-        i = SUIVANT[i];
+        precedent = actuel;
+        actuel = SUIVANT[actuel];
     }
-
-    // Si l'étudiant n'est pas trouvé
+    
     if (trouve == -1) {
-        printf("Étudiant non trouvé.\n");
+        printf("Etudiant avec numero %d non trouvé.\n", numero);
         return 0;
     }
-
-    // Mise à jour du chaînage
-    if (trouve == *DEB) {
-        *DEB = SUIVANT[trouve]; // Mettre à jour DEB si c'est le premier
+    
+    // Suppression de l'étudiant de la liste chaînée
+    if (precedent == -1) {
+        *DEB = SUIVANT[trouve];
     } else {
-        SUIVANT[avant] = SUIVANT[trouve]; // Relier le prédécesseur au suivant
+        SUIVANT[precedent] = SUIVANT[trouve];
     }
-
-    // Supprimer l'étudiant dans VETU
-    for (int j = trouve; j < *NBETU - 1; j++) {
-        VETU[j] = VETU[j + 1]; // Décaler les étudiants restants
-        SUIVANT[j] = SUIVANT[j + 1]; // Décaler aussi les indices de SUIVANT
+    
+    // Compacter le tableau VETU
+    for (int i = trouve; i < *NBETU - 1; i++) {
+        VETU[i] = VETU[i + 1];
     }
-
-    (*NBETU)--; // Réduire le nombre total d'étudiants
-
-    printf("Suppression réussie.\n");
+    
+    // Mise à jour des indices dans SUIVANT
+    for (int i = 0; i < *NBETU; i++) {
+        if (SUIVANT[i] > trouve) {
+            SUIVANT[i]--;
+        } else if (SUIVANT[i] == trouve) {
+            if (trouve == *NBETU - 1) {
+                SUIVANT[i] = -1;
+            } else {
+                SUIVANT[i] = trouve;
+            }
+        }
+    }
+    
+    // Ajustement du début si nécessaire
+    if (*DEB > trouve) {
+        (*DEB)--;
+    }
+    
+    (*NBETU)--;
+    
+    printf("Suppression réussie de l'étudiant avec numero %d.\n", numero);
     return 1;
 }
 
