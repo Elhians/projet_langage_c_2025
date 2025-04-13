@@ -44,7 +44,7 @@ int supprimerEtudiant(Etudiant* VETU, int* SUIVANT, int* NBETU, int* DEB, int nu
     int i = *DEB, avant = -1, trouve = -1;
 
     // Recherche de l'étudiant à supprimer et de son prédécesseur
-    while (i != 0) { // On suit la chaîne jusqu'à trouver l'étudiant
+    while (i != -1) { // On suit la chaîne jusqu'à trouver l'étudiant
         if (VETU[i].numero == numero) {
             trouve = i;
             break;
@@ -77,6 +77,7 @@ int supprimerEtudiant(Etudiant* VETU, int* SUIVANT, int* NBETU, int* DEB, int nu
     printf("Suppression réussie.\n");
     return 1;
 }
+
 int chargerEtudiant(){
     FILE *f = fopen("etudiants.dat", "rb");//un fichier binaire (rb et wb)? pcq Contrairement à un fichier texte, un fichier binaire stocke les structures C telles qu'elles sont en mémoire, sans avoir à les convertir en chaînes de caractères.
     if(f==NULL){
